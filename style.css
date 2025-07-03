@@ -191,9 +191,13 @@ header nav ul li a:hover {
   align-items: start;
 }
 .team-grid img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
+  max-width: 200px;
+  max-height: 200px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
 }
 
 .team-grid .team-member {
