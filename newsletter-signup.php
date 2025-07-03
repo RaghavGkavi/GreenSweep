@@ -7,26 +7,55 @@ $message = "";
 
 try {
     // Ensure file exists and has header
-    if (!file_exists($file) || filesize($file) === 0) {
-        if (file_put_contents($file, "Email,Date\n", FILE_APPEND | LOCK_EX) === false) {
-            throw new Exception("Could not create CSV file.");
+    if (!file_exists($file)) {
+        if (file_put_contents($file, "Email,Date\n") === false) {
+            throw new Exception("Could not create CSV file. Check file permissions.");
         }
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $entry = [$email, date('Y-m-d H:i:s')];
-            $fp = fopen($file, 'a');
-            if ($fp) {
-                if (fputcsv($fp, $entry) === false) {
-                    throw new Exception("Could not write to CSV file.");
+            // Prevent duplicate emails (case-insensitive, ignore header)
+            $alreadyExists = false;
+            $existing = fopen($file, 'r');
+            if ($existing) {
+                // Skip header
+                fgetcsv($existing);
+                while (($row = fgetcsv($existing)) !== false) {
+                    // Defensive: check if row[0] exists and is not empty
+                    if (isset($row[0]) && $row[0] !== '' && strcasecmp($row[0], $email) === 0) {
+                        $alreadyExists = true;
+                        break;
+                    }
                 }
-                fclose($fp);
-                $isSuccess = true;
-                $message = "Thank you for subscribing!";
+                fclose($existing);
             } else {
-                throw new Exception("Could not open CSV file for writing.");
+                throw new Exception("Could not open CSV file for reading. Check file permissions.");
+            }
+            if ($alreadyExists) {
+                $isSuccess = true;
+                $message = "You are already subscribed!";
+            } else {
+                $fp = fopen($file, 'a');
+                if ($fp) {
+                    if (flock($fp, LOCK_EX)) {
+                        if (fputcsv($fp, [$email, date('Y-m-d H:i:s')]) === false) {
+                            flock($fp, LOCK_UN);
+                            fclose($fp);
+                            throw new Exception("Could not write to CSV file. Check file permissions.");
+                        }
+                        flock($fp, LOCK_UN);
+                        fclose($fp);
+                        $isSuccess = true;
+                        $message = "Thank you for subscribing!";
+                    } else {
+                        fclose($fp);
+                        throw new Exception("Could not lock CSV file for writing. Check file permissions.");
+                    }
+                } else {
+                    throw new Exception("Could not open CSV file for writing. Check file permissions.");
+                }
             }
         } else {
             $message = "Please enter a valid email address.";
@@ -35,9 +64,9 @@ try {
         $message = "Invalid request.";
     }
 } catch (Exception $e) {
-    $message = "An error occurred. Please try again later.";
+    $message = $e->getMessage();
 }
-
+error_log("newsletter-signup.php: " . $message);
 echo json_encode([
     'success' => $isSuccess,
     'message' => $message
