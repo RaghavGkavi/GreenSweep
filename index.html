@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Project Green Sweep</title>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+ <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ <header>
+   <nav>
+     <div class="logo">Project Green Sweep</div>
+     <!-- Navigation removed as requested -->
+   </nav>
+ </header>
+
+
+ <!-- Hero Section with background image -->
+ <section class="hero">
+   <!-- GS2.jpg will be the background image for this section -->
+   <h1 class="fade-in">Project Green Sweep</h1>
+   <p class="fade-in">Students taking real action for a cleaner future.</p>
+ </section>
+
+
+ <section class="bubble-grid">
+   <div class="bubble">
+     <h3>Our Purpose & Mission</h3>
+     <p>Project Green Sweep is a student-led, action-driven initiative focused on leading all kinds of environmental projects that make a real difference, right now. What makes us stand out is our commitment to hands-on work: we don’t just talk about change, we get out there and make it happen.</p>
+   </div>
+
+
+   <div class="bubble">
+     <h3>Education Campaigns</h3>
+     <p>Through our education campaigns, we visit schools and classrooms to inspire the next generation of environmental leaders. Our team teaches students how small, everyday actions can make a big difference, nurturing eco-friendly habits and empowering youth to protect the planet.</p>
+   </div>
+
+
+   <div class="bubble">
+     <h3>Cleanups</h3>
+     <p>Our cleanup programs target local parks, rivers, and communities to maintain clean, safe environments. Join us in removing litter, improving habitats, and preserving the beauty of nature.</p>
+   </div>
+
+
+   <div class="bubble">
+     <h3>Fundraising</h3>
+     <p>Our fundraisers help power our cleanups, education campaigns, and outreach efforts. They also allow us to give back to other environmental causes. Every donation supports action, not just awareness. Want to make a difference? Support us below and fuel the movement.</p>
+     <a href="https://www.gofundme.com/f/join-us-students-driving-ecofriendly-change" target="_blank" class="cta-alt">Support the Cause</a>
+   </div>
+ </section>
+
+
+ <section id="gallery" class="content-section">
+   <h2>Gallery</h2>
+   <div class="gallery">
+     <img src="assets/photo1.jpg" alt="Event 1" />
+     <img src="assets/photo2.jpg" alt="Event 2" />
+     <img src="assets/photo3.jpg" alt="Event 3" />
+     <img src="assets/photo4.jpg" alt="Event 4" />
+     <img src="assets/photo5.jpg" alt="Event 5" />
+     <img src="assets/photo6.jpg" alt="Event 6" />
+     <img src="assets/photo7.jpg" alt="Event 7" />
+     <img src="assets/photo8.jpg" alt="Event 8" />
+     <img src="assets/photo9.jpg" alt="Event 9" />
+   </div>
+ </section>
+
+
+ <section id="partners" class="content-section">
+   <h2>Partners & Donations</h2>
+   <p>Want to support or collaborate with us? Reach out! We welcome like-minded partners and donations via our <a href="https://www.gofundme.com/f/join-us-students-driving-ecofriendly-change" target="_blank">GoFundMe</a>.</p>
+ </section>
+
+
+ <footer>
+   <div class="footer-content">
+     <h4>About Us</h4>
+     <p>Project Green Sweep is a student-powered movement taking direct action to improve the environment. Every event, every workshop, every cleanup — it's all driven by us.</p>
+     <p>© 2025 Project Green Sweep</p>
+   </div>
+ </footer>
+</body>
+</html>
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ scroll-behavior: smooth;
+}
+
+
+body {
+ font-family: 'Poppins', sans-serif;
+ background: #f9fafa;
+ color: #2d2d2d;
+ line-height: 1.6;
+ padding-top: 80px;
+ min-height: 100vh;
+}
+
+
+/* Header */
+header {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ background-color: #2f855a;
+ height: 70px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 0 30px;
+ box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+ z-index: 1000;
+}
+
+
+header .logo {
+ color: white;
+ font-weight: 700;
+ font-size: 1.5rem;
+}
+
+
+header nav ul {
+ display: flex;
+ list-style: none;
+ gap: 25px;
+}
+
+
+header nav ul li a {
+ color: white;
+ font-weight: 600;
+ text-decoration: none;
+ transition: color 0.3s ease;
+}
+
+
+header nav ul li a:hover {
+ color: #a3d57f;
+}
+
+
+.hero {
+ /* Background image GS2.jpg located inside your assets folder */
+ background: url('assets/GS2.jpg') no-repeat center center/cover;
+  /* Optional dark overlay to keep text readable */
+ box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+  color: white;
+ text-align: center;
+ padding: 120px 20px 100px;
+}
+
+
+.hero h1 {
+ font-size: 3rem;
+ margin-bottom: 10px;
+}
+
+
+.hero p {
+ font-size: 1.3rem;
+ max-width: 600px;
+ margin: 0 auto 20px;
+}
+
+
+/* Bubble Grid for main text sections */
+.bubble-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+ gap: 40px;
+ max-width: 1100px;
+ margin: 60px auto;
+ padding: 0 20px;
+}
+
+
+.bubble-grid .bubble {
+ background-color: #eafaf1;
+ border: 2px solid #cce9db;
+ border-radius: 20px;
+ padding: 30px 25px;
+ box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ color: #2d2d2d;
+}
+
+
+.bubble-grid .bubble:hover {
+ transform: scale(1.03);
+ box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+}
+
+
+.bubble-grid .bubble h3 {
+ font-size: 1.7rem;
+ color: #2f855a;
+ margin-bottom: 12px;
+}
+
+
+.bubble-grid .bubble p {
+ font-size: 1.05rem;
+ line-height: 1.5;
+ color: #444;
+}
+
+
+/* CTA button inside bubbles */
+.cta-alt {
+ display: inline-block;
+ margin-top: 15px;
+ padding: 12px 32px;
+ background-color: #2f855a;
+ color: white;
+ border-radius: 30px;
+ font-weight: 600;
+ text-decoration: none;
+ transition: background-color 0.3s ease;
+}
+
+
+.cta-alt:hover {
+ background-color: #276944;
+}
+
+
+/* Content Sections */
+.content-section {
+ max-width: 1100px;
+ margin: 60px auto;
+ padding: 0 20px;
+ text-align: center;
+}
+
+
+.content-section h2 {
+ font-size: 2rem;
+ color: #2f855a;
+ margin-bottom: 20px;
+}
+
+
+.content-section p,
+.content-section ul {
+ font-size: 1rem;
+ color: #444;
+ max-width: 800px;
+ margin: 0 auto;
+}
+
+
+/* Gallery */
+.gallery {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 20px;
+ margin-top: 30px;
+ justify-items: center;
+}
+
+
+.gallery img {
+ width: 100%;
+ height: 280px;
+ object-fit: cover;
+ border-radius: 12px;
+ box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+ transition: transform 0.3s ease;
+}
+
+
+.gallery img:hover {
+ transform: scale(1.03);
+}
+
+
+/* Footer */
+footer {
+ background-color: #e6f0e9;
+ padding: 40px 20px;
+ text-align: center;
+ color: #555;
+ font-size: 0.9rem;
+ border-top: 2px solid #a3d57f;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+ header nav ul {
+   gap: 15px;
+ }
+
+
+ .hero h1 {
+   font-size: 2.2rem;
+ }
+
+
+ .content-section h2 {
+   font-size: 1.7rem;
+ }
+
+
+ .bubble-grid {
+   grid-template-columns: 1fr !important;
+ }
+
+
+ .content-section p,
+ .content-section ul {
+   font-size: 0.95rem;
+ }
+
+
+ .gallery {
+   grid-template-columns: repeat(2, 1fr);
+   gap: 15px;
+ }
+}
+
