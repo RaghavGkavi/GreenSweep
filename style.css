@@ -256,6 +256,41 @@ header nav ul li a:hover {
 }
 
 
+/* Newsletter Form */
+.newsletter-form {
+ display: flex;
+ justify-content: center;
+ gap: 12px;
+ margin-top: 18px;
+ flex-wrap: wrap;
+}
+
+.newsletter-form input[type="email"] {
+ padding: 12px;
+ border-radius: 6px;
+ border: 1px solid #cce9db;
+ font-size: 1rem;
+ min-width: 220px;
+ outline: none;
+}
+
+.newsletter-form button {
+ padding: 12px 28px;
+ border-radius: 6px;
+ border: none;
+ background: #2f855a;
+ color: #fff;
+ font-weight: 600;
+ font-size: 1rem;
+ cursor: pointer;
+ transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+ background: #276944;
+}
+
+
 /* Footer */
 footer {
  background-color: #e6f0e9;

@@ -137,14 +137,57 @@
      <img src="assets/photo9.JPG" alt="Event 9" />
    </div>
  </section>
-
- <footer>
-   <div class="footer-content">
-     <h4>About Us</h4>
-     <p>Project Green Sweep is a student-powered movement taking direct action to improve the environment. Every event, every workshop, every cleanup — it's all driven by us.</p>
-     <p>Contact us at <a href="mailto:theprojectgreensweep@gmail.com">theprojectgreensweep@gmail.com</a></p>
-     <p>© 2025 Project Green Sweep</p>
-   </div>
+ <section id="newsletter" class="content-section">
+  <h2>Newsletter Sign Up</h2>
+  <form action="newsletter-signup.php" method="POST" class="newsletter-form" id="newsletter-form">
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit" id="subscribe-btn">Subscribe</button>
+  </form>
+  <span id="newsletter-message" style="display:block; margin-top:16px; font-weight:600;"></span>
+</section>
+<footer>
+  <div class="footer-content">
+    <h4>About Us</h4>
+    <p>Project Green Sweep is a student-powered movement taking direct action to improve the environment. Every event, every workshop, every cleanup — it's all driven by us.</p>
+    <p>Contact us at <a href="mailto:theprojectgreensweep@gmail.com">theprojectgreensweep@gmail.com</a></p>
+    <p>© 2025 Project Green Sweep</p>
+  </div>
  </footer>
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('newsletter-form');
+  var btn = document.getElementById('subscribe-btn');
+  var msg = document.getElementById('newsletter-message');
+  if(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+      msg.textContent = '';
+      var formData = new FormData(form);
+      fetch('newsletter-signup.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(r => r.json())
+      .then(data => {
+        if(data.success) {
+          btn.style.display = 'none';
+          msg.textContent = data.message;
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+          msg.textContent = data.message;
+        }
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+        msg.textContent = 'An error occurred. Please try again.';
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
