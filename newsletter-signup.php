@@ -5,6 +5,11 @@ $file = __DIR__ . '/newsletter-signups.csv';
 $isSuccess = false;
 $message = "";
 
+// Use explicit fgetcsv parameters to avoid PHP 8.1+ deprecation warnings
+$fgetcsv_delim = ',';
+$fgetcsv_encl = '"';
+$fgetcsv_escape = '\\';
+
 try {
     // Ensure file exists and has header
     if (!file_exists($file)) {
@@ -21,10 +26,9 @@ try {
             $existing = fopen($file, 'r');
             if ($existing) {
                 // Skip header
-                fgetcsv($existing);
-                while (($row = fgetcsv($existing)) !== false) {
-                    // Defensive: check if row[0] exists and is not empty
-                    if (isset($row[0]) && $row[0] !== '' && strcasecmp($row[0], $email) === 0) {
+                fgetcsv($existing, 0, $fgetcsv_delim, $fgetcsv_encl, $fgetcsv_escape);
+                while (($row = fgetcsv($existing, 0, $fgetcsv_delim, $fgetcsv_encl, $fgetcsv_escape)) !== false) {
+                    if (is_array($row) && isset($row[0]) && $row[0] !== '' && strcasecmp(trim($row[0]), $email) === 0) {
                         $alreadyExists = true;
                         break;
                     }
@@ -39,20 +43,13 @@ try {
             } else {
                 $fp = fopen($file, 'a');
                 if ($fp) {
-                    if (flock($fp, LOCK_EX)) {
-                        if (fputcsv($fp, [$email, date('Y-m-d H:i:s')]) === false) {
-                            flock($fp, LOCK_UN);
-                            fclose($fp);
-                            throw new Exception("Could not write to CSV file. Check file permissions.");
-                        }
-                        flock($fp, LOCK_UN);
+                    if (fputcsv($fp, [$email, date('Y-m-d H:i:s')]) === false) {
                         fclose($fp);
-                        $isSuccess = true;
-                        $message = "Thank you for subscribing!";
-                    } else {
-                        fclose($fp);
-                        throw new Exception("Could not lock CSV file for writing. Check file permissions.");
+                        throw new Exception("Could not write to CSV file. Check file permissions.");
                     }
+                    fclose($fp);
+                    $isSuccess = true;
+                    $message = "Thank you for subscribing!";
                 } else {
                     throw new Exception("Could not open CSV file for writing. Check file permissions.");
                 }
@@ -66,11 +63,12 @@ try {
 } catch (Exception $e) {
     $message = $e->getMessage();
 }
-error_log("newsletter-signup.php: " . $message);
+
 echo json_encode([
     'success' => $isSuccess,
     'message' => $message
 ]);
+exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +77,13 @@ echo json_encode([
     <title>Newsletter Signup</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+<body>
+    <div class="content-section" style="text-align:center; margin-top:100px;">
+        <h2><?php echo htmlspecialchars($message); ?></h2>
+        <p><a href="index.html">Return to homepage</a></p>
+    </div>
+</body>
+</html>
 <body>
     <div class="content-section" style="text-align:center; margin-top:100px;">
         <h2><?php echo htmlspecialchars($message); ?></h2>
