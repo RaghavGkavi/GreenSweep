@@ -65,25 +65,34 @@ header nav ul li a:hover {
 
 .hero {
  /* Background image GS2.jpg located inside your assets folder */
- background: url('assets/GS2.jpg') no-repeat center center/cover;
-  /* Optional dark overlay to keep text readable */
+ background: url('assets/photo9.jpg') no-repeat center center/cover;
+ /* Optional dark overlay to keep text readable */
  box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
-  color: white;
+ color: white;
  text-align: center;
- padding: 120px 20px 100px;
+ padding: 100px 20px 60px;
+}
+
+
+.hero-logo {
+  display: block;
+  margin: 16px auto 0 auto;
+  max-width: 220px;
+  width: 60vw;
+  height: auto;
 }
 
 
 .hero h1 {
- font-size: 3rem;
- margin-bottom: 10px;
+ font-size: 2.5rem;
+ margin-bottom: 12px;
 }
 
 
 .hero p {
- font-size: 1.3rem;
+ font-size: 1.1rem;
  max-width: 600px;
- margin: 0 auto 20px;
+ margin: 0 auto 18px;
 }
 
 
@@ -170,6 +179,51 @@ header nav ul li a:hover {
  color: #444;
  max-width: 800px;
  margin: 0 auto;
+}
+
+
+/* Team Grid: 2 per row, responsive */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+}
+.team-grid img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.team-grid .team-member {
+  text-align: center;
+  background-color: #eafaf1;
+  border-radius: 24px;
+  padding: 40px 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.13);
+  transition: transform 0.3s ease;
+  font-size: 1.15rem;
+}
+
+.team-grid .team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-grid .team-member h3 {
+  font-size: 1.5rem;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.team-grid .team-member p {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
