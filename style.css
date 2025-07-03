@@ -263,6 +263,16 @@ header nav ul li a:hover {
  gap: 12px;
  margin-top: 18px;
  flex-wrap: wrap;
+ align-items: center;
+}
+
+.newsletter-form input[type="email"],
+.newsletter-form button {
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  outline: none;
 }
 
 .newsletter-form input[type="email"] {
@@ -272,6 +282,8 @@ header nav ul li a:hover {
  font-size: 1rem;
  min-width: 220px;
  outline: none;
+ background: #fff;
+ color: #222;
 }
 
 .newsletter-form button {
@@ -286,7 +298,8 @@ header nav ul li a:hover {
  transition: background 0.2s;
 }
 
-.newsletter-form button:hover {
+.newsletter-form button:hover,
+.newsletter-form button:focus {
  background: #276944;
 }
 
