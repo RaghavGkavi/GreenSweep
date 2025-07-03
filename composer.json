@@ -1,5 +1,5 @@
 {
-    "name": "green-swwep/project-green-sweep",
-    "type": "project-green-sweep",
-    "require": {}
+  "name": "raghavgkavi/greensweep",
+  "description": "GreenSweep PHP Project",
+  "require": {}
 }
