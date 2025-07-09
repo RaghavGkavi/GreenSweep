@@ -1,11 +1,12 @@
 <?php
 // Dynamically allow CORS for both .com and .org origins
+header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
 $allowed_origins = [
     'https://green-sweep.com',
     'https://green-sweep.org'
 ];
 
-header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
