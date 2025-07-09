@@ -1,5 +1,23 @@
 <?php
+header('Access-Control-Allow-Origin: http://green-sweep.com');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
 header('Content-Type: application/json');
+
+// Only allow POST requests
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Method Not Allowed. Please use the form to submit your email.'
+    ]);
+    exit;
+}
 
 $file = __DIR__ . '/newsletter-signups.csv';
 $isSuccess = false;
@@ -18,7 +36,7 @@ try {
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+    if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // Prevent duplicate emails (case-insensitive, ignore header)
