@@ -1,5 +1,15 @@
 <?php
-header('Access-Control-Allow-Origin: https://green-sweep.com');
+// Allow both .com and .org as origins
+$allowed_origins = [
+    'https://green-sweep.com',
+    'https://green-sweep.org'
+];
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
