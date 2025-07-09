@@ -168,18 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
       var formData = new FormData(form);
       fetch('https://green-sweep.com/newsletter-signup.php', {
         method: 'POST',
-        body: formData
+        body: formData,
+        mode: 'no-cors'
       })
-      .then(r => r.json())
-      .then(data => {
-        if(data.success) {
-          btn.style.display = 'none';
-          msg.textContent = data.message;
-        } else {
-          btn.disabled = false;
-          btn.textContent = 'Subscribe';
-          msg.textContent = data.message;
-        }
+      .then(r => {
+        btn.style.display = 'none';
+        msg.textContent = "Thank you for subscribing!";
       })
       .catch(() => {
         btn.disabled = false;
