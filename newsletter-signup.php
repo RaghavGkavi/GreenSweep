@@ -9,7 +9,6 @@ if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed
     header('Access-Control-Allow-Credentials: true');
     header('Vary: Origin');
 } else {
-    // Always send a CORS header to avoid preflight errors
     header('Access-Control-Allow-Origin: *');
     header('Vary: Origin');
 }
@@ -121,4 +120,5 @@ exit;
         <p><a href="index.html">Return to homepage</a></p>
     </div>
 </body>
+</html>
 </html>
