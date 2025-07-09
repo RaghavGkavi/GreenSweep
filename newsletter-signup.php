@@ -9,8 +9,8 @@ if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed
     header('Access-Control-Allow-Credentials: true');
     header('Vary: Origin');
 } else {
-    // Always send a CORS header to avoid preflight errors, but restrict access
-    header('Access-Control-Allow-Origin: https://green-sweep.org');
+    // Always send a CORS header to avoid preflight errors
+    header('Access-Control-Allow-Origin: *');
     header('Vary: Origin');
 }
 header('Access-Control-Allow-Methods: POST, OPTIONS');
