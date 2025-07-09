@@ -6,10 +6,12 @@ $allowed_origins = [
 ];
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Vary: Origin');
 } else {
-    // Optionally, you can return a 403 here for disallowed origins
-    http_response_code(403);
-    exit;
+    // Always send a CORS header to avoid preflight errors, but restrict access
+    header('Access-Control-Allow-Origin: https://green-sweep.org');
+    header('Vary: Origin');
 }
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
