@@ -9,11 +9,12 @@ if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed
     header('Access-Control-Allow-Credentials: true');
     header('Vary: Origin');
 } else {
+    // Always send a CORS header to avoid preflight errors
     header('Access-Control-Allow-Origin: *');
     header('Vary: Origin');
 }
 header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
